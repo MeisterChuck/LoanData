@@ -76,7 +76,41 @@ void LoanData::PrintAmortizationSchedule() {
 			endingBalance);
 
 		beginningBalance = endingBalance;
+
+		fclose(pFile);
 	}
-}
+};
+
+//Optional function
+void LoanData::PrintPayOffTimeReport(double p, double e) {
+	FILE *cFile = NULL;
+	cFile = fopen("data.txt", "w");
+
+	fprintf(cFile, "n      A\n");
+
+	A = p*((i*pow(1 + i, 1)) / (pow(1 + i, 1) - 1));
+	int length = 1,
+		amount = (int)A;
+
+	if (amount > 0) {
+		for (length = 0; amount > 0; length++) {
+			amount /= 10;
+		}
+	}
+
+	length += 3;
+
+	for (int n = 1; n <= 50; n++) {
+		A = p*((i*pow(1 + i, n)) / (pow(1 + i, n) - 1));
+
+		fprintf(cFile, "%-*i    $%-*2lf\n",
+			length,
+			n,
+			length,
+			A);
+	}
+
+	fclose(cFile);
+};
 
 
