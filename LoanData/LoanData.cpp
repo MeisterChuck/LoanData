@@ -47,11 +47,12 @@ void LoanData::PrintAmortizationSchedule() {
 
 	length += 3;
 
-	FILE *pFile = NULL;
+	//FILE *pFile = NULL;
 	//Open the file
-	pFile = fopen("results.dat", "w");
+	//pFile = fopen("results.dat", "w");
 
-	fprintf(pFile, "Beginning Bal.   Interest paid   Principle paid   Ending Balance.\n");
+	printf("Beginning Bal.   Interest paid   Principle paid   Ending Balance.\n");
+	//fprintf(pFile, "Beginning Bal.   Interest paid   Principle paid   Ending Balance.\n");
 
 	while (beginningBalance > 0) {
 		if (i + 1 * Bal > A) {
@@ -65,7 +66,12 @@ void LoanData::PrintAmortizationSchedule() {
 		principlePaid = A - interestPaid;
 		endingBalance = (i + 1)*beginningBalance - A;
 		
-		fprintf(pFile, "$%-*.2f    $%-*.2f    $%-*.2f    $%-*.2f\n",
+		printf("$%*.2f    $%*.2f    $%*.2f    $%*.2f\n",
+			beginningBalance,
+			interestPaid,
+			principlePaid,
+			endingBalance);
+		/*fprintf(pFile, "$%-*.2f    $%-*.2f    $%-*.2f    $%-*.2f\n",
 			length,
 			beginningBalance,
 			length,
@@ -74,19 +80,21 @@ void LoanData::PrintAmortizationSchedule() {
 			principlePaid,
 			length,
 			endingBalance);
+			*/
 
 		beginningBalance = endingBalance;
 
-		fclose(pFile);
+		//fclose(pFile);
 	}
 };
 
 //Optional function
 void LoanData::PrintPayOffTimeReport(double p, double e) {
-	FILE *cFile = NULL;
-	cFile = fopen("data.dat", "w");
+	//FILE *cFile = NULL;
+	//cFile = fopen("data.dat", "w");
 
-	fprintf(cFile, "n      A\n");
+	printf("n      A\n");
+	//fprintf(cFile, "n      A\n");
 
 	A = p*((i*pow(1 + i, 1)) / (pow(1 + i, 1) - 1));
 	int length = 1,
@@ -103,14 +111,17 @@ void LoanData::PrintPayOffTimeReport(double p, double e) {
 	for (int n = 1; n <= 50; n++) {
 		A = p*((i*pow(1 + i, n)) / (pow(1 + i, n) - 1));
 
-		fprintf(cFile, "%-*i    $%-*2lf\n",
+		printf("%*i    $%*2lf\n",
+			n,
+			A);
+		/*fprintf(cFile, "%-*i    $%-*2lf\n",
 			length,
 			n,
 			length,
-			A);
+			A);*/
 	}
 
-	fclose(cFile);
+	//fclose(cFile);
 };
 
 //Main function
