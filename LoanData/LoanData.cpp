@@ -24,4 +24,9 @@ LoanData::LoanData(double p, double n, double e) {
 	Bal = p;
 };
 
+//Function is used to make payments and recalculates the balance
+void LoanData::MakePayment(double a) {
+	Bal = (i + 1)*Bal - a;
+};
+
 
