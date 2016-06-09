@@ -84,7 +84,7 @@ void LoanData::PrintAmortizationSchedule() {
 //Optional function
 void LoanData::PrintPayOffTimeReport(double p, double e) {
 	FILE *cFile = NULL;
-	cFile = fopen("data.txt", "w");
+	cFile = fopen("data.dat", "w");
 
 	fprintf(cFile, "n      A\n");
 
@@ -112,5 +112,28 @@ void LoanData::PrintPayOffTimeReport(double p, double e) {
 
 	fclose(cFile);
 };
+
+//Main function
+int main(int argc, char*argv[]) {
+	double p,
+		n,
+		e;
+
+	printf("\nLoan amount is: ");
+	scanf("\n%lf", &p);
+	printf("\nNumber of years to pay off loan is: ");
+	scanf("\n%lf", &n);
+	printf("\nYearly interest rate is: ");
+	scanf("\n%lf", &e);
+	printf("\nResults printed to results.dat");
+	printf("\nResults printed to data.dat\n\n");
+
+	LoanData data(p, n, e);
+	data.MakePayment(650.00);
+	data.PrintAmortizationSchedule();
+	data.PrintPayOffTimeReport(p, e);
+
+	return 0;
+}
 
 
